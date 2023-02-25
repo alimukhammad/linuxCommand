@@ -1,0 +1,263 @@
+
+create file
+	cat>{filename}
+		append cat>> {filename}
+	touch{filename} (create empty file) 
+		touch "filename" {1..100} (create multiple files at same time)
+
+vi editor - make directories
+	mkdir {directory name}
+	mkdir -p "directory name"{1..3}
+	touch /dir/dir/dir/{filename}{1..10}
+
+copy a file
+	cp -rvf <source> <destination>   (r-recursive v-verbal f-force)
+	ex: mv dir1 dir2
+	ex: mv dir1/file* dir2   (select all file in dir1 starting with file 
+	
+move a file
+	mv <old dir> <new dir> (you need to be inside the old dir)
+
+rename a directory/file
+	mv <oldname> <newname>
+
+remove be careful
+	rm -rf * (r recursive & f force)
+
+go back
+	cd ..
+
+make a directory
+	mkdir <directory name>
+	mkdir -p <dir1 dir2 dir3...> (make multiple dir using -p and dir names)
+
+remove directory
+	rmdir <directory name>
+	rmdir -rf dir2  (to remove the direcory with files inside)
+
+
+write the info verticaly long list type
+	ls -l  (drops the horizontal print to vertical)
+	ls -lr (reverses the info )
+	ls -lt (shows the list in loged time)
+	ls -lrt (shows the list in loged time but reversed)
+	ls -lrat (long list reverst almost all except hidden files)
+	ls -lart (long list reverst all including hidden files)
+
+hidden file
+	touch .file11 (dot in the front makes hidden)
+	
+
+-rw-r--r--. 1root root 3Feb 10 1756 file1
+
+- file
+d directory
+b block
+c character file
+s socket
+l soft link
+-rw-r--r--. 1 root root 0 Feb 14 12:18 file1
+
+- file
+d directory
+b block
+c character file
+s socket
+l soft link
+
+-------------------------------------------------------
+
+4 r read
+2 w write
+1 x execute
+
+-------------------------------------------------------
+ 0777
+-0011
+---------
+0766 default dir permission 
+
+0666 default full permission for file
+
+by default you wont have execute permission set to your files 
+but for the directories you'll have the execute bit 
+
+
+I have given mobeen 6 apples
+     	gave sardor 5 apples 
+
+ram wanted to get back 6 apples both from mobeen and sardor
+
+	6 	6 	6		1	1	1
+	rw-	rw-	rw-		--x	--x	--x
+
+
+	 666
+	-111
+	 666
+
+syntax for umask is umask value
+
+
+r,w,x (read write execute)
+rw-r--r-- > file permissions 
+
+number of hard links 
+hard link  double check
+2 soft link > number of hard link 
+1 default hard link (enttity & entity hard link)
+
+root > owner of the file
+root > Group of the file
+
+3 > Size of the file
+
+3 Feb 10 17:56 > time of the file creation 
+
+root > owner of the file 
+
+create a file to write
+	vi file click "i" to write to quit "wq!" or qw!
+
+
+
+ls -l|tail -1 ( gets the last data with in the list)
+	<command1>|<command2>
+	<output of the command 1>|<input to the command2>
+ls -l|head -1 ( gets the 1st data from the data in the list)
+
+
+chmod 700 file (permission type)
+	 
+	user	group	others		(r=4)(w=2)(x=1)
+	rwx	---	---  (700)
+	rwx	rwx	rwx  (777)
+
+	644 --> default file permissions for a file
+	755 --> default file permissions for directory
+	
+	default umask permissons can be changed umask 0022
+	
+
+manual help
+	man ls 
+	man
+
+Locate: 
+	Locate command gets the string or the file 
+	searched for from the entire file system(/)
+Find:
+	Find command fetches the files with more accuracy.
+	For example if you want to search for a file in a particular direcories or files
+
+locate<><><>
+find<location><option><keyword="i want to search for">
+	
+	
+-lrt
+-lrti
+-mtime
+-size
+-exec
+mtime = modified file
+amin = access file
+cmin = created file
+
+
+ls
+cd
+mkdir
+touch
+cat
+head
+less
+more
+|>
+grep
+tree
+man
+perm
+inode
+size
+
+disk management 
+
+partition: separation of disk to multiple chuncks   
+4 partition only
+Primary
+Secondary 
+Extended
+
+options for extending resizing reducing 
+
+
+Storage:
+storage is where to save all your data
+
+RAM: randaom access memory 
+ROM: read only memories
+HDD: 
+
+Creating partition (2 type)
+1 primary
+2 extended partition
+
+
+lvresize
+lvextend
+
+Linux has two things to do for connecting a device 
+1. Connecting the hardware
+2. ...
+
+...
+
+df = disk free
+df -h = more readable format
+df -T =file system type
+du = disk usage
+du /root = memory used inside /root
+du -h = readable size
+lsblk = list block
+fdisk -l = list partitions
+ls -lrt
+
+primary partition = add files directly into the partition
+extended partition = container that can add to any in need disk(can add disks where you can add files into it)
+
+file system type
+ext2
+ext3
+ext4
+xfs
+
+/etc/passwd ---> user info
+
+
+fdisk /dev/<partintion name>
+mkfs.xfs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
