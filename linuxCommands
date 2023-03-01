@@ -237,17 +237,17 @@ xfs
 fdisk /dev/<partintion name>
 mkfs.xfs
 
-
-
-
-
-
-
-
-
-
-
-
+Disk Management 
+fdisk
+sfdisk
+cfdisk
+parted
+df
+pydf
+lsblk
+blkid
+hwinfo
+Inxi
 
 
 
