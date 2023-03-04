@@ -5,7 +5,8 @@ Process Management
 
 
 File Permissions
-
+    chmod <filename>
+      ex: chmod 777 excel.txt
 
 SSH
 
