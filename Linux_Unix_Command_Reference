@@ -1,5 +1,19 @@
 File Commands
-
+    ls
+    ls -al
+    cd
+    pwd
+    mkdir
+    rm -rf
+    cp -rvf <source> <destination>
+    mv <source> <destination> (to mova a file/dir or to rename)
+    touch <filename>
+    cat> <filename> 
+    more <filename>
+    head <filename>
+    tail <filename>
+    tail -f <filename>
+    ln -s <filename> link
 
 Process Management
 
