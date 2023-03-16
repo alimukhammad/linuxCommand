@@ -250,7 +250,8 @@ hwinfo
 Inxi
 
 
-
+init 6 => restart thr machine 
+Reboot => reboots the system
 
 
 
