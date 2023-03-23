@@ -71,19 +71,242 @@ root > Group of the file
 
 root > owner of the file 
 
+new partition:-----
+
+fdisk /dev/partition parent
+
+	n
+	p or e (primary or entended)
+	4 (since 3 partitions are already created)
+	.. recording
+
+Partitions/Disk 
+	> Physical Volume
+		> Volume Group 
+			> Logical Volume
+
+lsblk
+Create/Delete a partiotion
+	fdisk /dev/nvme0n1
+		n (new partition) d(deleting partition)
+			...Last selection add storage size +5G 
+
+Make the changes in the kernel Level use this comman
+	kpartx -f /dev/nvme0n1
+
+
+
+Extended partition can not be mounted bcuz it's 1K 
+
+create tar ball
+	tar -cvzf <file/dir name>
+		(c=create)(v=verbos)(z=zip)(f=force)
+Extract tar ball
+	tar -xvzf <file/dir name>
+		(x=extract)
+
+pvcreate
+lvcreate 
+
+inside the partittion before same 
+	add LVM by running "l" => 8e Linux LVM
+	kpartx -f /dev/nvme0n1
+	pvcreate /dev/nvme0n1p4
+	vgcreate volume_group /dev/nvme0n1p4
 
 
 
 
+Partition
+fdisk /dev/<HDD name>
+n---> new
+p---> primary partiton
+size----> +nG ( n can be your desired number in Gigs, according to size of your HDD )
+t----> type of partition
+which partition: 4
+L: list the hex codes
+LVM: 8e
+Then
+Linux changes to Linux LVM
+w: write changes to the disk
+kpartx -f------> update partition table at kernel level
+pvcreate------> Physical volume creation--------> pvcreate /dev/nvme0n1p4( because you chose partition 4)
+vgcreate------> volume group creation-----> vgcreate <vgname> <partition>
+lvcreate-----> logical volume creation----> lvcreate -L <size +nG> <vgname>
+
+lvextend
+lvreduce
+lvremove
+mkfs.xfs -f /dev/<vgname>/<lvname>----> put file system type on to your disk
+
+then mounting:
+
+temporary/permanent
+
+mount <lvpath> <mp path>
+
+/etc/fstab
 
 
 
+create an LV try extending and redusing it 
 
 
 
+Put a file system (.xtf/exp3/exp4/exp5)
+	mkfs.xfs -f /dev/nvme0n1p4 (mkfs=make_file_system)
+
+-Temporary mounting 
+	mount /dev/sda mpa
+	Mount a partition
+		mount <disk path> <mountpoint path>
+		mount /dev/voleme_group/lvol0 mp (mp is a created dir)
+		Check if mount is succesfull 
+			mount|grep -w "/dev/nvme0n1p4"
+
+-Permamanent mounting
+	edit a file called /etc/fstab
+	vi /etc/fstab (for security keep a copy of fstab, ex:cp /etc/fstab <copy path)
+	add label/UUID> path> file type> default> ts> 0 0 
+	mount <disk path> <mountpoint path>
+	mount /dev/nvme0n1p4 /root/Desktop/mp
+	mount|grep -w "/dev/nvme0n1p4"	
+	-remove permanant mounting
+		go into /etc/fstab & remove the entries 
+		use "umount" to unmount 
+
+Mounting Check
+	df -h
+	lsblk
+	mount|grep -w "<diskname>"
+	mount -l|grep -w "<diskname>"
+	cat /proc/self/mounts|grep -w "<diskname>"
+	cat /proc/mounts|grep -w "<diskname>"
+
+mp = mount point
+mount /dev/nvme0n1p4 mp
+
+init 6 (restart)
 
 
+Mounting creation steps below
+you always have to give whole path after each command all commands below
+
+Fdisk = create partition fdisk /dev/devicename
+n = new partition
+p = primary partition
+size = +2G you can give size according to HDS
+t = type of partition or where you wanna mount
+L = list the HEX code
+8e = mount thanks Linux change to LVM
+w = is used to save
+kpartx -f =update partition table at kernel level
+pvcreate = Physical volume creation
+
+vgcreate  = volume group creation & you also have to give vg a name anything you want
+
+lvcreate - L = logical volume creation full command is lvcreate -L +2G name of VG
+
+lvextend = is used to extend logical volume
+
+mkfs.xfs -f  = is to put file system in lvm
+
+mount = mount the logical volume full command is mount /dev/vg name / lvol0 mp
+
+mount | grep -w “lvol0” = is used to mount
+
+unmount = used to unmount the logical V full command is unmount /dev/vg name / lvol0 mp
+
+lvremove = is used to remove logical volume
+vgremove  = is used to removed volume group
+pvremove =isused to removed physical volume
 
 
+            How to delete partation below
 
+fdisk  /dev/nvme0n1 device name
+d = delete partition
+kpartx -f =update partition table at kernel level full path is kpartx -f /dev/devicename
+
+
+...
+
+Partition formation
+	Note: changing type 8e
+	pvcreate
+	vgcreate
+	lvcreate: +1G
+	lvresize -L +2G /dev/<vg name>/<lv name>
+	mounting
+	mount| grep -w "<lvname>----> checking mounted or not
+	xfs_growfs-----> this is to grow your file system type across the extended lvol
+	This will do the + part or the extend part by using lvresize command
+
+	Now comes - part, which is reduce by using lvresize command:
+
+	umount /dev/<vgname>/<lv name>
+	check unmounting using mount|grep -w "<lvname>"
+	[
+	Note: Before reducing the size it is always recommended to take the data backup if any!
+	You can use tar utility for making a tar ball and copy it to a safe location for data retrieval
+
+	tar -cvzf 
+	cp xyz.tar /root
+	paste xyz.tar inside mount point
+	unzip by using tar -xvzf command
+	once it is done your data will be ready to use again
+	]
+
+	The above is if you have any data in the disk
+
+	Then,
+
+	lvreduce -L -nG /dev/<vgname>/<lvname>
+
+	mkfs.xfs /dev/<vgname>/<lvname>
+
+	mount it back
+	check mounting
+--------------------------------------------------
+HW
+One scenario where you have enough space in VG
+
+vg=5GB
+
+you have made 1G lvol extended it to 3G(1+2G) and then reduced it back to 1GB(3-2G)
+
+What if you have to extend your lvol from 4G to 7G?
+
+This is your assignment!
+---------------------------------------------------
+
+vgextend----> to extend space in VG
+
+vgextend <vgname> <pvname>
+
+lvconvert----> so there are two ways of migrating the logical volume from one disk to another
+
+what we are doing here is we are migrating the lvol0 which is made on the pv--> /dev/nvme0n1p4 to /dev/nvme0n2p1
+
+/dev/nvme0n1p4
+lvol0-----> /dev/nvme0n1p4
+
+lvconvert -m 1 /dev/test_vg/lvol0 /dev/nvme0n2p1
+
+lvol0(mirror)-----> /dev/nvme0n2p1 (new pv)
+
+pvmove:
+
+pvmove -n /dev/test_vg/lvol0 /dev/nvme0n2p1(current pv name with lv) /dev/nvme0n1p4 (desired pv to migrate lv)
+
+
+---------------------------------------
+
+lvsnapshot:
+
+lvcreate -L +1G -s -n <snap name> /dev/<vgname>/<lvname>
+
+umount source lv
+
+lvconvert --merge /dev/<vgname>/<snap name>
 
