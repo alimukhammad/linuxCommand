@@ -310,3 +310,159 @@ umount source lv
 
 lvconvert --merge /dev/<vgname>/<snap name>
 
+
+-----------------------------------------------
+
+sudo
+
+So, if you want a regular user to use super user commands instead of giving him full access 
+to utilize the commands you will assign the needed commands to the regular user via sudoers file
+
+sudo---> super user do!
+
+sudoers file----> /etc/sudoers should be edited to give access of desired super user commands to
+a regular user
+
+vi /etc/sudoers
+
+You may mess it up with wrong configurations and you will not warned about them
+
+thats why we use an utility called visudo to edit /etc/sudoers file
+
+
+visudo
+	(why use visudo instead of vi/etc/sudoers)
+	bcuz /etc/sudoers is a 
+	use visudo only for sudoers file edits 
+
+why not vi /etc/sudoers and why visudo?
+
+because /etc/sudoers is a syntactical file and any errors made will affect the server.
+If we edit it by using vi /etc/sudoers we will not be warned if there are any wrong configurations
+but visudo gives us the warnings of misconfiguration!
+
+So, its visudo always not vi /etc/sudoers
+
+
+se nu 
+	to show numbers.
+
+which	
+	to find the path name 
+
+userdel <userName>
+	it deletes a user 
+
+useradd <userName>
+	it addes new user 
+
+exit 	
+	exits from current user
+
+groupadd <groupName>
+	create group
+		sudo usermod -G <groupName>
+..
+Aliases:
+
+------------------------------------
+User and Group Management
+
+The main difference between useradd and adduser is useradd provides the directory structure for a user according to a file called /etc/skel but adduser on the other hand will only add the user. It will not add any directories.. So, useradd is always considered a better option when you are adding users to your server.
+
+
+
+--------------------------------
+
+yum-----> yellow dog update manager
+
+installation syntax:
+
+yum install <package name*>
+yum status <package name*>
+yum update <package name*>
+yum upgrade <package name*>
+
+Yum upgrade and yum update differences:
+
+Yum update will update the package and delete the obselete packages
+yum upgrade will update the package but it will not delete the obselete packages
+
+So, when ever you update the kernel version you will use yum upgrade command instead of yum update
+
+---------------------------------
+
+what is the difference between rpm and yum?
+
+rpm can't do the dependency resolution on its own
+yum can do the dependency resultion
+
+-------------
+
+>>> AWS
+
+can you update changes made to a particular server?
+
+systemctl restart <service name>
+------------------------------------------------------
+can you update changes made to a particular server?
+
+systemctl restart <service name>
+
+yum clean all------------> clean the repos
+yum update all-----------> update the repositories
+-------------------------------------------------------
+
+putty is a terminal or a client that connects to your server(aws instance)
+
+yum-----> utility------> that helps you install something on RHEL
+
+what does yum install?
+
+just like .exe/.msi on windows we have .rpm packages that when installed will make softwares run to install them
+we have 3 utilities rpm, yum and dnf
+
+we are using yum to install a software by installation from .rpm packages
+
+
+what is .rpm?
+
+redhat package manager, this is the file from whcih installation happen!
+-----------------------------------------------------
+
+yum install http* -y
+
+installed
+
+systemctl start httpd.service
+systemctl stop httpd.service
+systemctl restart httpd.service
+systemctl status httpd.service
+
+------------------------------------------------------------
+
+
+SSH:Prerequisites:2 virtual machinesVM1: 
+nmtui---> activate connection--> okVM2: 								<nmtui>(network connection)
+nmtui---> activate connection--> okVM1: 
+check ip address and keep an eye (128) ip address|grep ens160(just check) 
+nmcli connection showVM2: check the ip address and keep an eye (129) 
+ip address|grep ens160
+nmcli connection show
+Then you will go to VM1
+ssh-keygen   enterenterenter
+Key pair will be formedcd /root/.sshid_rsa----> private keyid_rsa.pub---> 
+public keypwd/root/.ssh
+ssh-copy-id id_rsa.pub 
+root@<VM2 IP address>ssh <VM2 IP address>
+ip addresspwd/roottouch file{1..10}
+shift from vm1 to vm2
+and check if the 10 files are formed inside /root of vm2
+
+
+nmtui
+ip address |grep ens160
+ssh-keygen
+
+
+
