@@ -464,5 +464,91 @@ nmtui
 ip address |grep ens160
 ssh-keygen
 
+------------------------------------------------------------
+vi editor:
 
+linux-----> settings changes, process changes...------> text file editing
+
+
+editors------> nano, vi, vim
+
+
+vi----> editor
+
+visual text editor
+
+
+vi <file name/path name>
+
+/etc/passwd-----> user info
+
+1. insert mode
+2. command mode
+3. extended command mode/column mode
+
+
+insert mode: edit
+
+i- insert at the cursor position
+shift+I- insert at the start of the line
+shift+A- insert at the end of the line
+esc- to come out of insert mode
+o- to insert in a fresh line below cursor position
+shift+O- to insert in a fresh line above the cursor position
+
+Command mode: 
+
+gg- page up(cursor goes to top of the page)
+G-  page down(cursor goes to end of the page)
+w- go forward word by word
+nw- go forward n words
+b- go back word by word
+nb- go back n words
+note: n can be any number
+yy- to yank the line at cursor position
+nyy- yank n lines
+p- paste the yanked lines at the cursor position
+u- undo the last change
+ctrl+R- redo
+dd- delete the line at cursor position
+ndd- to delete n lines from cursor position
+/<keyword>- you can search for the keyword
+
+
+Extended command mode:
+Extended command mode is also called as column mode because it starts with column
+
+w: write
+q: quit without saving
+wq: save and quit
+x: save and quit
+se nu: line numbering
+se nonu: remove line numbering
+<line number>: cursor goes to that line number
+
+Note: if you want to save or quit or save and quit forcefully then you have to add a ! symbol at the end of w or q oe wq or x
+SE linux:
+
+Security Enhanced Linux
+
+1. Mandatory Access Control
+2. Discretionary access control
+
+Discretional access control:
+
+file permissions
+special permissions
+
+root or the owners of the files
+
+Mandatory access control----> system level access control mechanism
+
+So, everything in linux
+
+may be user
+may be process
+may be file
+may be directory
+
+SE LINUX LABEL
 
